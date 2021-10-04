@@ -1,7 +1,13 @@
 .face {
   display: inline-block;
+  margin: 20px;
 }
 
 .success {
   border: 20px solid green;
+  margin: 0;
+}
+.fail {
+  border: 20px solid red;
+  margin: 0;
 }
