@@ -6,7 +6,7 @@ $(readyNow);
 
 function readyNow() {
   console.log("JQ");
-  // initialize faces on DOM
+  // initialize faces on DOM in a random order
   for (let person of shuffle(people)) {
     let face = $(`
   <div class="face">
@@ -14,13 +14,13 @@ function readyNow() {
 
   </div>
   `);
-    $("body").append(face);
+    $("#faceContainer").append(face);
     face.data(person);
   }
   // initialize nameToGuess
   nameRandomizer();
   // event listener
-  $(`.face`).on(`click`, checkIfCorrect);
+  $(`#faceContainer`).on(`click`, ".face", checkIfCorrect);
 }
 
 function checkIfCorrect() {
@@ -33,12 +33,18 @@ function checkIfCorrect() {
     setTimeout(function () {
       self.removeClass("success");
       nameRandomizer();
-    }, 2000);
+      setTimeout(function () {
+        alert("Correct! New Person to Find!");
+      }, 10);
+    }, 1500);
   } else {
     self.addClass("fail");
     setTimeout(function () {
       self.removeClass("fail");
-    }, 2000);
+      setTimeout(function () {
+        alert("Sorry, Guess Again!");
+      }, 10);
+    }, 1500);
   }
 }
 
@@ -56,7 +62,7 @@ function randomNumber(min, max) {
 function shuffle(arr) {
   // loop over arr starting at the end and work backwards
   for (let i = arr.length - 1; i > 0; i--) {
-    // generate a random index from 0 to last index
+    // generate a random index from 0 to current index
     let j = Math.floor(Math.random() * (i + 1));
     // swap the current element with the element at the random index
     let t = arr[i];
@@ -66,3 +72,4 @@ function shuffle(arr) {
   }
   return arr;
 }
+[0, 1, 2, 3, 4];
