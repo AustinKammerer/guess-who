@@ -26,9 +26,11 @@ function readyNow() {
 function checkIfCorrect() {
   // save this to variable so it can be correctly accessed in the setTimeout callbacks
   let self = $(this);
+  // access the name of the face clicked
   let name = self.data().name;
-  console.log(name);
+  // check if the name of the face clicked matches the randomized nameToGuess
   if (name === nameToGuess) {
+    // if so, add the success class and delay its removal as well an alert, then get a new nameToGuess
     self.addClass("success");
     setTimeout(function () {
       self.removeClass("success");
@@ -37,7 +39,9 @@ function checkIfCorrect() {
         alert("Correct! New Person to Find!");
       }, 10);
     }, 1500);
-  } else {
+  }
+  // if not, add the fail class and delay its removal as well as an alert, game continues
+  else {
     self.addClass("fail");
     setTimeout(function () {
       self.removeClass("fail");
@@ -49,10 +53,12 @@ function checkIfCorrect() {
 }
 
 function nameRandomizer() {
+  // randomize an index for the people array and set that person to nameToGuess
   nameToGuess = people[randomNumber(0, people.length - 1)].name;
   $("#nameToGuess").text(nameToGuess);
 }
 
+// random number function
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (1 + max - min) + min);
 }
@@ -65,11 +71,10 @@ function shuffle(arr) {
     // generate a random index from 0 to current index
     let j = Math.floor(Math.random() * (i + 1));
     // swap the current element with the element at the random index
-    let t = arr[i];
-    arr[i] = arr[j];
-    arr[j] = t;
+    let t = arr[i]; // set temporary holder 't' to current value
+    arr[i] = arr[j]; // set current value to the value at randomized index
+    arr[j] = t; // set the value at the randomized index to 't' which is holding the original current value
     // effect: starting at the end of the array and working backwards, each element is swapped with a random element that precedes it in the array
   }
   return arr;
 }
-[0, 1, 2, 3, 4];
